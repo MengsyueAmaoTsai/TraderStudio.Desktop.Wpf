@@ -1,16 +1,20 @@
 {
-  "dotnet.defaultSolution": "RichillCapital.Studio.Desktop.sln",
-  "dotnet.server.useOmnisharp": true,
   "[csharp]": {
+    "editor.defaultFormatter": "EditorConfig.EditorConfig",
     "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    },
-    "editor.defaultFormatter": "ms-dotnettools.csharp"
+      "source.fixAll": true,
+      "source.organizeImports": true
+    }
   },
   "[json][jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true
   },
+  "dotnet.defaultSolution": "RichillCapital.Studio.Desktop.sln",
   "cSpell.words": ["Mediat", "Richill"]
 }
