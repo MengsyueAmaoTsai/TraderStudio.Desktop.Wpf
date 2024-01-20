@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="./Solution.Build.props" />
+  <Import Project="./Solution.Packages.props" />
   
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -25,12 +26,4 @@
     <None Remove="Solution.ruleset" />
     <None Remove="Solution.Tests.props" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
-  </ItemGroup>
-
 </Project>
