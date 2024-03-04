@@ -26,4 +26,8 @@
     <None Remove="Solution.ruleset" />
     <None Remove="Solution.Tests.props" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="Libs\RichillCapital.UseCases\RichillCapital.UseCases.csproj" />
+  </ItemGroup>
 </Project>
