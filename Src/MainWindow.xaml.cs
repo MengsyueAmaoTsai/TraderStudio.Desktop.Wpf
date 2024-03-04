@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RichillCapital.Studio.Desktop;
+namespace RichillCapital.TraderStudio.Desktop;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

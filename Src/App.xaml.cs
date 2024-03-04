@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace RichillCapital.Studio.Desktop;
+namespace RichillCapital.TraderStudio.Desktop;
 
 public partial class App : Application
 {
