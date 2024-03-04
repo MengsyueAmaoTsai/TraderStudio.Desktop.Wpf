@@ -19,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CC387BAC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Studio.Desktop", "RichillCapital.Studio.Desktop.csproj", "{0126E659-60D5-4AA8-B972-DC14A6766666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Studio.Desktop.UnitTests", "Tests\RichillCapital.Studio.Desktop.UnitTests\RichillCapital.Studio.Desktop.UnitTests.csproj", "{92E3BDFF-D8C2-49B1-922B-F5E7801FCADE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,15 +29,8 @@ Global
 		{0126E659-60D5-4AA8-B972-DC14A6766666}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0126E659-60D5-4AA8-B972-DC14A6766666}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0126E659-60D5-4AA8-B972-DC14A6766666}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92E3BDFF-D8C2-49B1-922B-F5E7801FCADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92E3BDFF-D8C2-49B1-922B-F5E7801FCADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92E3BDFF-D8C2-49B1-922B-F5E7801FCADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92E3BDFF-D8C2-49B1-922B-F5E7801FCADE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{92E3BDFF-D8C2-49B1-922B-F5E7801FCADE} = {CC387BAC-93D0-4A84-B80B-9C0D398824A9}
 	EndGlobalSection
 EndGlobal
