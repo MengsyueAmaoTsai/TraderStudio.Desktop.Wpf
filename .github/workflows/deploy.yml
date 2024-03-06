@@ -1,0 +1,34 @@
+name: Deployment
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  DOTNET_VERSION: 8.0.x
+  SOLUTION_FILE: ./RichillCapital.TraderStudio.Desktop.sln
+  CONFIGURATION: Release
+
+jobs:
+  deploy:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build ${{ env.SOLUTION_FILE }} --no-restore
+      
+    - name: Test
+      run: dotnet test ${{ env.SOLUTION_FILE }} -c ${{ env.CONFIGURATION }} --no-restore --no-build
