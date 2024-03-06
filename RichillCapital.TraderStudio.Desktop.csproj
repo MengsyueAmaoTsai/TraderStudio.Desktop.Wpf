@@ -9,12 +9,16 @@
   
   <ItemGroup>
     <Compile Remove="coverage\**" />
+    <Compile Remove="Libs\**" />
     <Compile Remove="Tests\**" />
     <EmbeddedResource Remove="coverage\**" />
+    <EmbeddedResource Remove="Libs\**" />
     <EmbeddedResource Remove="Tests\**" />
     <None Remove="coverage\**" />
+    <None Remove="Libs\**" />
     <None Remove="Tests\**" />
     <Page Remove="coverage\**" />
+    <Page Remove="Libs\**" />
     <Page Remove="Tests\**" />
   </ItemGroup>
   
