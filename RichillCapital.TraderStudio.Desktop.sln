@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{54E151BE-A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.UseCases", "Libs\RichillCapital.UseCases\RichillCapital.UseCases.csproj", "{985DB695-9385-4846-8E71-F1E487A854E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.TraderStudio.Desktop.AcceptanceTests", "Tests\RichillCapital.TraderStudio.Desktop.AcceptanceTests\RichillCapital.TraderStudio.Desktop.AcceptanceTests.csproj", "{EB0A924D-6423-4589-96E2-A7DB445C7C20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{985DB695-9385-4846-8E71-F1E487A854E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{985DB695-9385-4846-8E71-F1E487A854E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{985DB695-9385-4846-8E71-F1E487A854E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB0A924D-6423-4589-96E2-A7DB445C7C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB0A924D-6423-4589-96E2-A7DB445C7C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB0A924D-6423-4589-96E2-A7DB445C7C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB0A924D-6423-4589-96E2-A7DB445C7C20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,5 +52,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{985DB695-9385-4846-8E71-F1E487A854E8} = {54E151BE-ADD8-4D6A-905C-08E4568918CF}
+		{EB0A924D-6423-4589-96E2-A7DB445C7C20} = {CC387BAC-93D0-4A84-B80B-9C0D398824A9}
 	EndGlobalSection
 EndGlobal
