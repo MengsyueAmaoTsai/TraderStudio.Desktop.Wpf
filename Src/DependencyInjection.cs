@@ -8,7 +8,7 @@ namespace RichillCapital.TraderStudio.Desktop;
 
 internal static class DependencyInjection
 {
-    internal static IServiceCollection AddDesektop(this IServiceCollection services)
+    internal static IServiceCollection AddDesktop(this IServiceCollection services)
     {
         services.AddMessenger();
 

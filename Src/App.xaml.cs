@@ -38,7 +38,7 @@ public partial class App : Application
             .ConfigureServices((context, services) =>
             {
                 services.AddUseCases();
-                services.AddDesektop();
+                services.AddDesktop();
             });
 
         return builder;
