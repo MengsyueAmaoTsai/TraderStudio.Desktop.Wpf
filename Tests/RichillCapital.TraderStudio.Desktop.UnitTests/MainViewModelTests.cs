@@ -1,6 +1,6 @@
 using FluentAssertions;
 
-namespace RichillCapital.TraderStudio.Desktop.AcceptanceTests;
+namespace RichillCapital.TraderStudio.Desktop.UnitTests;
 
 public partial class MainViewModelTests
 {
