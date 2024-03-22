@@ -23,6 +23,8 @@ internal static class DependencyInjection
     {
         services.AddSingleton<MainWindow>();
 
+        services.AddScoped<LoginWindow>();
+
         return services;
     }
 
