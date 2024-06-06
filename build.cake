@@ -1,11 +1,14 @@
 var solution = "./RichillCapital.TraderStudio.Desktop.sln";
+var project = "./RichillCapital.TraderStudio.Desktop.csproj";
 var buildConfiguration = Argument("configuration", "Release");
 var publishDirectory = "./publish";
 
 Task("Clean")
     .Does(() =>
     {
-        // DotNetClean(solution);
+        CleanDirectory(publishDirectory);
+        CleanDirectory("./bin");
+        CleanDirectory("./obj");
     });
 
 Task("Restore")
@@ -17,18 +20,13 @@ Task("Restore")
 Task("Build")
     .Does(() =>
     {
-        // Build WPF project
-        var wpfProject = "./RichillCapital.TraderStudio.Desktop.csproj";
-
         DotNetBuild(
-            wpfProject,
+            project,
             new DotNetBuildSettings
             {
                 Configuration = buildConfiguration,
                 NoRestore = true,
             });
-
-        // Build Packaging project use MSBuild
     });
 
 Task("Test")
@@ -36,17 +34,12 @@ Task("Test")
     {
     });
 
-Task("Publish")
-    .Does(() =>
-    {
-    });
 
 Task("Default")
     .IsDependentOn("Clean")
     .IsDependentOn("Restore")
     .IsDependentOn("Build")
-    .IsDependentOn("Test")
-    .IsDependentOn("Publish");
+    .IsDependentOn("Test");
 
 var target = Argument("target", "Default");
 RunTarget(target);
