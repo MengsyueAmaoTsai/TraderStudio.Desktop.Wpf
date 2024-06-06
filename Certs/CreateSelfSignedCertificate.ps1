@@ -10,3 +10,4 @@ $password = ConvertTo-SecureString -String Pa55w0rd! -Force -AsPlainText
 $path = $location + "/" + $cert.thumbprint
 
 Export-PfxCertificate -cert $path -FilePath $output -Password $password
+
