@@ -17,10 +17,10 @@ jobs:
     
     env:
       DotNet_Version: 8.0.x
-      Solution_Name: ./RichillCapital.TraderStudio.Desktop.sln
+      Solution_Path: ./RichillCapital.TraderStudio.Desktop.sln
       Wap_Project_Directory: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
       Wap_Project_Path: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj.
-      SigningCertificate: ./RichillCapital.TraderStudio.Desktop.pfx
+      WPF_Project_Path: ./RichillCapital.TraderStudio.Desktop.csproj
 
     steps:
     - name: Checkout
@@ -36,24 +36,21 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
     
-    # Decode pfx
+    # Decode certificate
+    - name: Restore Depdenencies
+      run: dotnet restore $env:Solution_Path
 
-    - name: Restore depdenencies
-      run: dotnet restore $env:Solution_Name
-      # run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
-      # env:
-      #   Configuration: Debug
-      #   RuntimeIdentifier: win-${{ matrix.targetplatform }}
+    - name: Build WPF Application Project
+      run: dotnet build $env:WPF_Project_Path -c Release --no-restore
     
-    - name: Build the Windows Application Packaging Project (wapproj)
+    - name: Build Windows Application Packaging Project
       run: msbuild $env:Solution_File /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle
       env:
         AppxBundle: Never
         BuildMode: SideloadOnly
-        Configuration: Debug
+        Configuration: Release
         TargetPlatform: ${{ matrix.targetplatform }}
-
-    # Remove the .pfx
-
+        
+    # Remove certificate
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
         
