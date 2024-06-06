@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        targetplatform: [x86, x64]
+        targetPlatform: [x86, x64]
     
     runs-on: windows-latest
     
@@ -49,8 +49,8 @@ jobs:
         AppxBundle: Never
         BuildMode: SideloadOnly
         Configuration: Release
-        TargetPlatform: ${{ matrix.targetplatform }}
-        
+        TargetPlatform: ${{ matrix.targetPlatform }}
+
     # Remove certificate
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
         
