@@ -43,9 +43,9 @@ jobs:
 
     - name: Decode Signing Certificate
       run: |
-        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_CERTIFICATE }}")
+        $certificateContent = [System.Convert]::FromBase64String("${{ secrets.BASE64_CERTIFICATE }}")
         $certificatePath = Join-Path -Path $env:Wap_Project_Directory -ChildPath $env:Certificate_Name
-        [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
+        [IO.File]::WriteAllBytes("$certificatePath", $certificateContent)
         
     - name: Publish Artifact
       run: msbuild $env:Wap_Project_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:Certificate_Name /p:PackageCertificatePassword=${{ secrets.CERTIFICATE_PASSWORD}}
