@@ -5,7 +5,7 @@ var publishDirectory = "./publish";
 Task("Clean")
     .Does(() =>
     {
-        DotNetClean(solution);
+        // DotNetClean(solution);
     });
 
 Task("Restore")
@@ -17,42 +17,28 @@ Task("Restore")
 Task("Build")
     .Does(() =>
     {
+        // Build WPF project
+        var wpfProject = "./RichillCapital.TraderStudio.Desktop.csproj";
+
         DotNetBuild(
-            solution,
+            wpfProject,
             new DotNetBuildSettings
             {
                 Configuration = buildConfiguration,
                 NoRestore = true,
             });
+
+        // Build Packaging project use MSBuild
     });
 
 Task("Test")
     .Does(() =>
     {
-        DotNetTest(
-            solution,
-            new DotNetTestSettings
-            {
-                Configuration = buildConfiguration,
-                NoBuild = true,
-                NoRestore = true,
-            });
     });
 
 Task("Publish")
     .Does(() =>
     {
-        CleanDirectory(publishDirectory);
-
-        DotNetPublish(
-            solution,
-            new DotNetPublishSettings
-            {
-                Configuration = buildConfiguration,
-                NoRestore = true,
-                NoBuild = true,
-                OutputDirectory = publishDirectory,
-            });
     });
 
 Task("Default")
