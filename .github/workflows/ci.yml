@@ -34,6 +34,12 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
+    - name: Update Version
+      run: |
+        [xml]$manifest = Get-Content "./$env:Wap_Project_Directory/Package.appxmanifest"
+        $manifest.Package.Identity.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
+        $manifest.save("./$env:Wap_Project_Directory/Package.appxmanifest")
+
     - name: Build and Tests with Cake Tool
       uses: cake-build/cake-action@v2
       with:
