@@ -87,7 +87,7 @@ jobs:
       if: matrix.ChannelName != 'Prod_Store'
 
     - name: Publish Application Package for ${{ matrix.ChannelName }}
-      run: msbuild $env:Wap_Project_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:Certificate_Name /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      run: msbuild $env:Wap_Project_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:Certificate_Name /p:PackageCertificatePassword=${{ secrets.CERTIFICATE_PASSWORD }}
       if: matrix.ChannelName != 'Prod_Store'
       env:
         AppxBundle: Never
