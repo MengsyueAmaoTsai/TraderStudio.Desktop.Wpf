@@ -44,4 +44,4 @@ jobs:
       run: msbuild $env:Solution_Path /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
       env:
         Configuration: Debug
-        RuntimeIdentifier: win-${{ matrix.targetplatform }}
+        RuntimeIdentifier: win-${{ matrix.targetPlatform }}
