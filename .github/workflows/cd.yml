@@ -18,38 +18,40 @@ jobs:
             ChannelName: Dev
             Configuration: Debug
             DistributionUrl: https://microsoft.github.io/github-actions-for-desktop-apps-distribution-dev
-            MsixPackageId: MyWPFApp.DevOpsDemo.Dev
-            MsixPublisherId: CN=GitHubActionsDemo
-            MsixPackageDisplayName: MyWPFApp (Dev)
+            MsixPackageId: RichillCapital.TraderStudio.Desktop.Dev
+            MsixPublisherId: CN=RichillCapital
+            MsixPackageDisplayName: RichillCapital TraderStudio (Dev)
 
           - channel: Prod_Sideload
             Configuration: Release
             ChannelName: Prod_Sideload
             DistributionUrl: https://microsoft.github.io/github-actions-for-desktop-apps-distribution-prod
-            MsixPackageId: MyWPFApp.DevOpsDemo.ProdSideload
-            MsixPublisherId: CN=GitHubActionsDemo
-            MsixPackageDisplayName: MyWPFApp (ProdSideload)
+            MsixPackageId: RichillCapital.TraderStudio.Desktop.ProdSideload
+            MsixPublisherId: CN=RichillCapital
+            MsixPackageDisplayName: RichillCapital TraderStudio (ProdSideload)
 
           - channel: Prod_Store
             Configuration: Release
             ChannelName: Prod_Store
             DistributionUrl:
-            MsixPackageId: MyWPFApp.DevOpsDemo.ProdStore
-            MsixPublisherId: CN=GitHubActionsDemo
-            MsixPackageDisplayName: MyWPFApp (ProdStore)
+            MsixPackageId: RichillCapital.TraderStudio.Desktop.ProdStore
+            MsixPublisherId: CN=RichillCapital
+            MsixPackageDisplayName: RichillCapital TraderStudio (ProdStore)
 
     runs-on: windows-latest
 
     env:
+      Wap_Project_Directory: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
+      Wap_Project_Path: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj
+
+
       App_Packages_Archive: AppPackages.zip
       App_Packages_Directory: AppPackages
-      SigningCertificate: RichillCapital.TraderStudio.Desktop.pfx
       Solution_Path: ./RichillCapital.TraderStudio.Desktop.sln
       
+      Certificate_Name: RichillCapital.TraderStudio.Desktop.pfx
       Wpf_Project_Path: ./RichillCapital.TraderStudio.Desktop.csproj
 
-      Wap_Project_Directory: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
-      Wap_Project_Name: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj
 
     steps:
     - name: Checkout
@@ -85,7 +87,7 @@ jobs:
       if: matrix.ChannelName != 'Prod_Store'
 
     - name: Publish Application Package for ${{ matrix.ChannelName }}
-      run: msbuild $env:Solution_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:SigningCertificate /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      run: msbuild $env:Wap_Project_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:Certificate_Name /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
       if: matrix.ChannelName != 'Prod_Store'
       env:
         AppxBundle: Never
@@ -96,7 +98,7 @@ jobs:
         TargetPlatform: ${{ matrix.targetplatform }}
 
     - name: Publish Application Package for ${{ matrix.ChannelName }}
-      run: msbuild $env:Solution_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:GenerateAppInstallerFile=$env:GenerateAppInstallerFile /p:AppxPackageSigningEnabled=$env:AppxPackageSigningEnabled
+      run: msbuild $env:Wap_Project_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:GenerateAppInstallerFile=$env:GenerateAppInstallerFile /p:AppxPackageSigningEnabled=$env:AppxPackageSigningEnabled
       if: matrix.ChannelName == 'Prod_Store'
       env:
         AppxBundle: Never
