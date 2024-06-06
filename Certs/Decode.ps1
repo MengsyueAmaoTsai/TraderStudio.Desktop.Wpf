@@ -58,6 +58,7 @@ I9sf6sNDxCvt0xGOJlAlNwrkruAEFImUPgjfY4DoUzNxCW9CHqLI626PAgIH0A=="
 $certificateBytes = [System.Convert]::FromBase64String($base64)
 $currentDirectory = Get-Location
 $certificateName = "RichillCapital.TraderStudio.Desktop.pfx"
-$newCertificatePath = Join-Path -Path $currentDirectory -ChildPath Certs -AdditionalChildPath $certificateName
+$certificateOutputDirectory = "./Packaging/RichillCapital.TraderStudio.Desktop.Package/"
+$newCertificatePath = Join-Path -Path $currentDirectory -ChildPath $certificateOutputDirectory -AdditionalChildPath $certificateName
 
 [IO.File]::WriteAllBytes($newCertificatePath, $certificateBytes)

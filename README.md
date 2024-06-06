@@ -1,11 +1,14 @@
 # RichillCapital.TraderStudio.Desktop
 
-## Build
+## Publish
 
 ```bash
-msbuild .\RichillCapital.TraderStudio.Desktop.sln /p:Platform=x64 /p:Configuration=Release /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Never /p:PackageCertificateKeyFile=Certs/RichillCapital.TraderStudio.Desktop.pfx
-```
+# Decode Signing Certificate
+./Certs/Decode.ps1
 
-```bash
-certutil -encode ./Certs/RichillCapital.TraderStudio.Desktop.pfx ./Certs/RichillCapital.TraderStudio.Desktop.asc
+# Publish AppPackages
+msbuild ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj /p:Platform=x64 /p:Configuration=Release /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Never /p:PackageCertificateKeyFile=RichillCapital.TraderStudio.Desktop.pfx /p:PackageCertificatePassword=Pa55w0rd!
+
+# Remove Signing Certificate
+./Certs/Remove.ps1
 ```
