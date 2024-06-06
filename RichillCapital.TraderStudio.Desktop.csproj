@@ -10,14 +10,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Libs\**" />
     <Compile Remove="Packaging\**" />
+    <EmbeddedResource Remove="Libs\**" />
     <EmbeddedResource Remove="Packaging\**" />
+    <None Remove="Libs\**" />
     <None Remove="Packaging\**" />
+    <Page Remove="Libs\**" />
     <Page Remove="Packaging\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Libs\RichillCapital.UseCases\RichillCapital.UseCases.csproj" />
+    <ProjectReference Include="Libs\RichillCapital.Identity\RichillCapital.Identity.csproj" />
   </ItemGroup>
 </Project>
