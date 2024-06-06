@@ -110,7 +110,8 @@ jobs:
 
     - name: Remove Signing Certificate
       run: Remove-Item -Path $env:Wap_Project_Directory/$env:Certificate_Name
-
+      if: matrix.ChannelName != 'Prod_Store'
+    
     - name: Create Archive
       run: Compress-Archive -Path $env:Wap_Project_Directory\$env:App_Packages_Directory\* -DestinationPath $env:Wap_Project_Directory\$env:App_Packages_Directory\$env:App_Packages_Archive
 
