@@ -11,11 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packaging", "Packaging", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{931BE277-B451-4916-A9D8-082361207B4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Domain", "Libs\RichillCapital.Domain\RichillCapital.Domain.csproj", "{696CCC34-C29B-40A5-8C2A-4CC7D95C60AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Domain", "Libs\RichillCapital.Domain\RichillCapital.Domain.csproj", "{696CCC34-C29B-40A5-8C2A-4CC7D95C60AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.UseCases", "Libs\RichillCapital.UseCases\RichillCapital.UseCases.csproj", "{A4081377-A157-4EE8-9B53-F90C9928ACC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.UseCases", "Libs\RichillCapital.UseCases\RichillCapital.UseCases.csproj", "{A4081377-A157-4EE8-9B53-F90C9928ACC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Identity", "Libs\RichillCapital.Identity\RichillCapital.Identity.csproj", "{3685CEEB-D71C-4999-9A5B-2A374699F87D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Identity", "Libs\RichillCapital.Identity\RichillCapital.Identity.csproj", "{3685CEEB-D71C-4999-9A5B-2A374699F87D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Logging", "Libs\RichillCapital.Logging\RichillCapital.Logging.csproj", "{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +143,26 @@ Global
 		{3685CEEB-D71C-4999-9A5B-2A374699F87D}.Release|x64.Build.0 = Release|Any CPU
 		{3685CEEB-D71C-4999-9A5B-2A374699F87D}.Release|x86.ActiveCfg = Release|Any CPU
 		{3685CEEB-D71C-4999-9A5B-2A374699F87D}.Release|x86.Build.0 = Release|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Debug|x64.Build.0 = Debug|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Debug|x86.Build.0 = Debug|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Release|ARM.Build.0 = Release|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Release|ARM64.Build.0 = Release|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Release|x64.ActiveCfg = Release|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Release|x64.Build.0 = Release|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Release|x86.ActiveCfg = Release|Any CPU
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,6 +172,7 @@ Global
 		{696CCC34-C29B-40A5-8C2A-4CC7D95C60AC} = {931BE277-B451-4916-A9D8-082361207B4C}
 		{A4081377-A157-4EE8-9B53-F90C9928ACC8} = {931BE277-B451-4916-A9D8-082361207B4C}
 		{3685CEEB-D71C-4999-9A5B-2A374699F87D} = {931BE277-B451-4916-A9D8-082361207B4C}
+		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B} = {931BE277-B451-4916-A9D8-082361207B4C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94EDDA9C-8525-4AF9-9E00-A8B97449AC77}
