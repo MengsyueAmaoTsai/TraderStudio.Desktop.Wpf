@@ -32,7 +32,7 @@ jobs:
     - name: Setup .NET Workload
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: $env:DotNet_Version
+        dotnet-version: ${{ env.DotNet_Version }}
 
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
