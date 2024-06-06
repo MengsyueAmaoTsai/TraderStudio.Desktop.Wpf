@@ -16,13 +16,9 @@ jobs:
     runs-on: windows-latest
     
     env:
-      # DotNet_Version: 8.0.x
-      Solution_Path: ./RichillCapital.TraderStudio.Desktop.sln
-      Wap_Project_Directory: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
-      Wap_Project_Path: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj.
-      WPF_Project_Path: ./RichillCapital.TraderStudio.Desktop.csproj
+      Solution_Name: ./RichillCapital.TraderStudio.Desktop.sln
       App_Packages_Directory: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/AppPackages
-      Signing_Certificate: ./Certs/RichillCapital.TraderStudio.Desktop.pfx
+      Certificate_Name: RichillCapital.TraderStudio.Desktop.pfx
 
     steps:
     - name: Checkout
@@ -34,12 +30,6 @@ jobs:
       uses: dotnet/nbgv@master
       id: nbgv
 
-    # INSTEAD OF USING CAKE TOOL
-    # - name: Setup .NET Workload
-    #   uses: actions/setup-dotnet@v4
-    #   with:
-    #     dotnet-version: ${{ env.DotNet_Version }}
-
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
@@ -49,25 +39,30 @@ jobs:
         script-path: build.cake
         target: default
         verbosity: Diagnostic
-    
-        # INSTEAD OF USING CAKE TOOL
-        # - name: Restore Depdenencies
-        #   run: dotnet restore $env:Solution_Path
-        
-        # - name: Build WPF Application Project
-        #   run: dotnet build $env:WPF_Project_Path -c Release --no-restore
-      
-    # TODO: Update Manifest file with version number
+
+    - name: Decode Certificate
+      run: |
+        $certificateContent = [System.Convert]::FromBase64String("${{ secrets.BASE64_CERTIFICATE }}")
+        $currentDirectory = Get-Location
+        $certificatePath = Join-Path -Path $currentDirectory -ChildPath Certs -AdditionalChildPath $Certificate_Name
+        $directory = [System.IO.Path]::GetDirectoryName($certificatePath)
+        if (-not (Test-Path -Path $directory)) {
+            New-Item -ItemType Directory -Path $directory -Force
+        }
+        [IO.File]::WriteAllBytes($certificatePath, $certificateContent)
+      shell: pwsh
 
     - name: Publish Artifact
-      run: msbuild $env:Solution_File /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:Signing_Certificate /p:PackageCertificatePassword=Pa55w0rd!
+      run: msbuild $env:Solution_Name /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=./Certs/$env:Certificate_Name /p:PackageCertificatePassword=${{ secrets.CERTIFICATE_PASSWORD}}
       env:
         AppxBundle: Never
         BuildMode: SideloadOnly
         Configuration: Release
         TargetPlatform: ${{ matrix.targetPlatform }}
 
-    # TODO: Remove certificate
+    - name: Remove Certificate
+      run: Remove-Item -Path ./Certs/$env:Certificate_Name
+      shell: pwsh
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
