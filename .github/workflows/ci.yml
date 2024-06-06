@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        targetPlatform: [x86, x64]
+        targetplatform: [x86, x64]
     
     runs-on: windows-latest
     
@@ -35,20 +35,25 @@ jobs:
 
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
-
-    - name: Decode Base64 encdoed certificate
-      run: |
-        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
-        $currentDirecotry = Get-Location
-        $certificatePath = Join-Path -Path $currentDirectory -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
-        [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
+    
+    # Decode pfx
 
     - name: Restore depdenencies
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
-      env:
-        Configuration: Debug
-        RuntimeIdentifier: win-${{ matrix.targetPlatform }}
+      run: dotnet restore $env:Solution_Name
+      # run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
+      # env:
+      #   Configuration: Debug
+      #   RuntimeIdentifier: win-${{ matrix.targetplatform }}
     
-    # Build
-    # Test
-    # Publish
+    - name: Build the Windows Application Packaging Project (wapproj)
+      run: msbuild $env:Solution_File /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle
+      env:
+        AppxBundle: Never
+        BuildMode: SideloadOnly
+        Configuration: Debug
+        TargetPlatform: ${{ matrix.targetplatform }}
+
+    # Remove the .pfx
+
+    # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
+        
