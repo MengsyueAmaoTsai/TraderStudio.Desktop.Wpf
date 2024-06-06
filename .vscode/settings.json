@@ -1,4 +1,4 @@
 {
   "dotnet.defaultSolution": "RichillCapital.TraderStudio.Desktop.sln",
-  "cSpell.words": ["Mvvm"]
+  "cSpell.words": ["msbuild", "Mvvm", "Sideload"]
 }
