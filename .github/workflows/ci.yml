@@ -40,8 +40,8 @@ jobs:
     # - name: Execute unit tests
       # run: dotnet test
 
-    - name: Restore Dependencies
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+    - name:  Restore depdenencies
+      run: msbuild $env:Solution_Path /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
       env:
-        Configuration: ${{ matrix.configuration }}
-
+        Configuration: Debug
+        RuntimeIdentifier: win-${{ matrix.targetplatform }}
