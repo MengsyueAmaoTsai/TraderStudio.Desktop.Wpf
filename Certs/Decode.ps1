@@ -60,10 +60,4 @@ $currentDirectory = Get-Location
 $certificateName = "RichillCapital.TraderStudio.Desktop.pfx"
 $newCertificatePath = Join-Path -Path $currentDirectory -ChildPath Certs -AdditionalChildPath $certificateName
 
-$directory = [System.IO.Path]::GetDirectoryName($certificatePath)
-
-if (-not (Test-Path -Path $directory)) {
-    New-Item -ItemType Directory -Path $directory -Force
-}
-
 [IO.File]::WriteAllBytes($newCertificatePath, $certificateBytes)
