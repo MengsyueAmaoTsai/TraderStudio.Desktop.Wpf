@@ -51,8 +51,6 @@ jobs:
       Wap_Project_Directory: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
       Wap_Project_Name: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj
 
-      Actions_Allow_Unsecure_Commands: true 
-
     steps:
     - name: Checkout
       uses: actions/checkout@v4
