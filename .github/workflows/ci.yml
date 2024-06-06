@@ -72,5 +72,5 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: MSIX Package for ${{ matrix.targetPlatform }}
+        name: trader-studio-desktop-${{ matrix.targetPlatform }}
         path: ${{ env.Wap_Project_Directory}}/${{ env.App_Packages_Directory }}
