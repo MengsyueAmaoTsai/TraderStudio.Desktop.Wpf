@@ -1,0 +1,47 @@
+name: .NET WPF Continuous Integration
+
+on:
+  push:
+    branches: [ "master" ]
+  
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        targetPlatform: [x86, x64]
+    
+    runs-on: windows-latest
+    
+    env:
+      DotNet_Version: 8.0.x
+      Solution_Name: ./RichillCapital.TraderStudio.Desktop.sln
+      Wap_Project_Directory: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
+      Wap_Project_Path: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj.
+
+      # Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET Workload
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: $env:DotNet_Version
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v2
+
+    # - name: Execute unit tests
+      # run: dotnet test
+
+    - name: Restore Dependencies
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
+
