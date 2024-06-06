@@ -1,4 +1,4 @@
-name:  Wpf Continuous Delivery
+name:  Wpf Continuous Deployment
 
 on:
   push:
