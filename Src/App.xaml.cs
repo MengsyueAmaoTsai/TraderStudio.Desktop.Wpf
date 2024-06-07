@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -41,9 +40,11 @@ public partial class App : Application
         .ConfigureServices((hostContext, services) =>
         {
             services.AddScoped<MainWindow>();
-            services.AddScoped<MainViewModel>();
-
+            
+            services.AddTransient<SignInDialog>();
             services.AddTransient<AboutDialog>();
+            
+            services.AddScoped<MainViewModel>();
             services.AddTransient<AboutViewModel>();
 
             services.AddSingleton<WeakReferenceMessenger>();
