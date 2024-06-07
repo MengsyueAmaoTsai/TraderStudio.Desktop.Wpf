@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 
+using CommunityToolkit.Mvvm.Messaging;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,6 +41,11 @@ public partial class App : Application
         {
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainViewModel>();
+
+            services.AddSingleton<WeakReferenceMessenger>();
+            services.AddSingleton<IMessenger, WeakReferenceMessenger>(provider =>
+                provider.GetRequiredService<WeakReferenceMessenger>());
+
             services.AddSingleton(_ => Current.Dispatcher);
         });
 }
