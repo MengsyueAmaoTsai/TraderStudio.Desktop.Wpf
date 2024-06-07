@@ -43,6 +43,9 @@ public partial class App : Application
             services.AddScoped<MainWindow>();
             services.AddScoped<MainViewModel>();
 
+            services.AddTransient<AboutDialog>();
+            services.AddTransient<AboutViewModel>();
+
             services.AddSingleton<WeakReferenceMessenger>();
             services.AddSingleton<IMessenger, WeakReferenceMessenger>(provider =>
                 provider.GetRequiredService<WeakReferenceMessenger>());
