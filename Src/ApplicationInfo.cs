@@ -25,14 +25,14 @@ internal class ApplicationInfo
         return NotPackaged;
     }
 
-    internal static string GetAppInstallerUri()
+    internal static string GetPackageUri()
     {
-        return string.Empty;
+        return NotPackaged;
     }
 
     internal static string GetInstallLocation() => Assembly.GetExecutingAssembly().Location;
 
-    internal static string GetDotNetRuntimeInfo()
+    internal static string GetDotNetRuntimeVersion()
     {
         var attribute = typeof(object).Assembly
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>() ??
