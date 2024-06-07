@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using RichillCapital.Logging;
+
 namespace RichillCapital.TraderStudio.Desktop;
 
 public partial class App : Application
@@ -35,6 +37,7 @@ public partial class App : Application
 
     private static IHostBuilder CreateHostBuilder(string[] args) => Host
         .CreateDefaultBuilder(args)
+        .UseTraderStudioDesktopLogger()
         .ConfigureAppConfiguration((hostBuilderContext, configurationBuilder) =>
             configurationBuilder.AddUserSecrets(typeof(App).Assembly))
         .ConfigureServices((hostContext, services) =>
