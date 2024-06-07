@@ -5,53 +5,92 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RichillCapital.TraderStudio.Desktop"
         mc:Ignorable="d"
-        Title="AboutDialog" 
-        WindowStartupLocation="CenterScreen"
-        Height="800" Width="1200" Background="#16161e" Foreground="#c2c2c3">
+        Title="About" WindowStartupLocation="CenterScreen" Height="800" Width="1200">
     <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" Margin="5">
+            <TabItem Header="Application Informatin" FontSize="14" FontWeight="Bold">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Margin="5">
-            <TextBlock Text="About" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="36" FontWeight="Bold"/>
-        </Border>
+                    <Border Grid.Row="0" Margin="5">
+                        <TextBlock Text="Application Information" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="36" FontWeight="Bold"/>
+                    </Border>
 
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5">
-            <TextBlock Text="Package Name" FontWeight="Bold" FontSize="20" Margin="5"/>
-            <TextBlock Text="{Binding PackageName}" FontWeight="Bold" FontSize="16" Margin="5"/>
-        </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5">
+                        <TextBlock Text="Package Name" FontWeight="Bold" FontSize="20" Margin="5"/>
+                        <TextBlock Text="{Binding PackageName}" FontWeight="Bold" FontSize="16" Margin="5"/>
+                    </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="5">
-            <TextBlock Text="Package Version" FontWeight="Bold" FontSize="20" Margin="5"/>
-            <TextBlock Text="{Binding PackageVersion}" FontWeight="Bold" FontSize="16" Margin="5"/>
-        </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Vertical" Margin="5">
+                        <TextBlock Text="Package Version" FontWeight="Bold" FontSize="20" Margin="5"/>
+                        <TextBlock Text="{Binding PackageVersion}" FontWeight="Bold" FontSize="16" Margin="5"/>
+                    </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Vertical" Margin="5">
-            <TextBlock Text="Installed From" FontWeight="Bold" FontSize="20" Margin="5"/>
-            <TextBlock Text="{Binding PackageUri}" FontWeight="Bold" FontSize="16" Margin="5"/>
-        </StackPanel>
+                    <StackPanel Grid.Row="3" Orientation="Vertical" Margin="5">
+                        <TextBlock Text="Installed From" FontWeight="Bold" FontSize="20" Margin="5"/>
+                        <TextBlock Text="{Binding PackageUri}" FontWeight="Bold" FontSize="16" Margin="5"/>
+                    </StackPanel>
 
-        <StackPanel Grid.Row="4" Orientation="Vertical" Margin="5">
-            <TextBlock Text="Assembly Version" FontWeight="Bold" FontSize="20" Margin="5"/>
-            <TextBlock Text="{Binding AssemblyVersion}" FontWeight="Bold" FontSize="16" Margin="5"/>
-        </StackPanel>
+                    <StackPanel Grid.Row="4" Orientation="Vertical" Margin="5">
+                        <TextBlock Text="Assembly Version" FontWeight="Bold" FontSize="20" Margin="5"/>
+                        <TextBlock Text="{Binding AssemblyVersion}" FontWeight="Bold" FontSize="16" Margin="5"/>
+                    </StackPanel>
 
-        <StackPanel Grid.Row="5" Orientation="Vertical" Margin="5">
-            <TextBlock Text="Install Location" FontWeight="Bold" FontSize="20" Margin="5"/>
-            <TextBlock Text="{Binding InstallLocation}" FontWeight="Bold" FontSize="16" Margin="5"/>
-        </StackPanel>
+                    <StackPanel Grid.Row="5" Orientation="Vertical" Margin="5">
+                        <TextBlock Text="Install Location" FontWeight="Bold" FontSize="20" Margin="5"/>
+                        <TextBlock Text="{Binding InstallLocation}" FontWeight="Bold" FontSize="16" Margin="5"/>
+                    </StackPanel>
 
-        <StackPanel Grid.Row="6" Orientation="Vertical" Margin="5">
-            <TextBlock Text=".NET Runtime Version" FontWeight="Bold" FontSize="20" Margin="5"/>
-            <TextBlock Text="{Binding DotNetRuntimeVersion}" FontWeight="Bold" FontSize="16" Margin="5"/>
-        </StackPanel>
+                    <StackPanel Grid.Row="6" Orientation="Vertical" Margin="5">
+                        <TextBlock Text=".NET Runtime Version" FontWeight="Bold" FontSize="20" Margin="5"/>
+                        <TextBlock Text="{Binding DotNetRuntimeVersion}" FontWeight="Bold" FontSize="16" Margin="5"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Process Information" FontSize="14" FontWeight="Bold">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Margin="5">
+                        <TextBlock Text="Process Information" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="36" FontWeight="Bold"/>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Thread Pool Information" FontSize="14" FontWeight="Bold" >
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Margin="5">
+                        <TextBlock Text="Thread Pool Information" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="36" FontWeight="Bold"/>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="GC Information" FontSize="14" FontWeight="Bold" >
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Margin="5">
+                        <TextBlock Text="GC Information" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="36" FontWeight="Bold"/>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
-
 </Window>
