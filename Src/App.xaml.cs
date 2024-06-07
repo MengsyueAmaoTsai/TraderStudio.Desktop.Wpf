@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -39,8 +40,8 @@ public partial class App : Application
             configurationBuilder.AddUserSecrets(typeof(App).Assembly))
         .ConfigureServices((hostContext, services) =>
         {
-            services.AddSingleton<MainWindow>();
-            services.AddSingleton<MainViewModel>();
+            services.AddScoped<MainWindow>();
+            services.AddScoped<MainViewModel>();
 
             services.AddSingleton<WeakReferenceMessenger>();
             services.AddSingleton<IMessenger, WeakReferenceMessenger>(provider =>
@@ -49,3 +50,4 @@ public partial class App : Application
             services.AddSingleton(_ => Current.Dispatcher);
         });
 }
+
