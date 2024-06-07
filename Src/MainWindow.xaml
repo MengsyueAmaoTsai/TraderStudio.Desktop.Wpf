@@ -39,7 +39,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Content="Create" Command="{Binding OpenCreateDialogCommand}"/>
+            <Button Grid.Row="0" Content="Create" Command="{Binding TestCommand}"/>
             
             <DataGrid Grid.Row="1" ItemsSource="{Binding SignalSources}" SelectedItem="{Binding SelectedSignalSource}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>

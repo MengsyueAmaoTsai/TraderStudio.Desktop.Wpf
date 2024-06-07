@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Libs\RichillCapital.Logging\RichillCapital.Logging.csproj" />
+    <ProjectReference Include="Libs\RichillCapital.Storage\RichillCapital.Storage.csproj" />
     <ProjectReference Include="Libs\RichillCapital.UseCases\RichillCapital.UseCases.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Identity\RichillCapital.Identity.csproj" />
   </ItemGroup>

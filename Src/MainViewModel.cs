@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Text;
 using System.Windows;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -6,20 +8,26 @@ using CommunityToolkit.Mvvm.Input;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using RichillCapital.Domain.Common;
+
 namespace RichillCapital.TraderStudio.Desktop;
 
 public sealed partial class MainViewModel : ObservableObject
 {
     private readonly IServiceProvider _serviceProvider;
+    private readonly ILocalStorageManager _localFileStorage;
 
     public ObservableCollection<SignalSourceModel> SignalSources { get; } = [];
 
     [ObservableProperty]
     private SignalSourceModel? _selectedSignalSource;
 
-    public MainViewModel(IServiceProvider serviceProvider)
+    public MainViewModel(
+        IServiceProvider serviceProvider,
+        ILocalStorageManager localFileStorage)
     {
         _serviceProvider = serviceProvider;
+        _localFileStorage = localFileStorage;   
 
         SignalSources.Add(new SignalSourceModel
         {
@@ -30,17 +38,18 @@ public sealed partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private async Task TestAsync()
+    {
+        await Task.Delay(500);
+        MessageBox.Show("Test");
+    }
+
+    [RelayCommand]
     private void OpenAbout()
     {
         var dialog = _serviceProvider.GetRequiredService<AboutDialog>();
 
         dialog.ShowDialog();
-    }
-
-    [RelayCommand]
-    private void OpenCreateDialog()
-    {
-        MessageBox.Show($"Selected signal source: {SelectedSignalSource}");
     }
 }
 

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using RichillCapital.Logging;
+using RichillCapital.Storage;
 
 namespace RichillCapital.TraderStudio.Desktop;
 
@@ -42,6 +43,10 @@ public partial class App : Application
             configurationBuilder.AddUserSecrets(typeof(App).Assembly))
         .ConfigureServices((hostContext, services) =>
         {
+            // Infrastructure - File Storage
+            services.AddLocalFileStorageManager();
+
+            // Presentation - MVVM
             services.AddScoped<MainWindow>();
             
             services.AddTransient<SignInDialog>();
