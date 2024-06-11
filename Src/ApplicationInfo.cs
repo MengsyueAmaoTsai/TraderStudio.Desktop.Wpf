@@ -2,7 +2,7 @@
 
 namespace RichillCapital.TraderStudio.Desktop;
 
-internal class ApplicationInfo
+internal static class ApplicationInfo
 {
     private const string NotPackaged = "Not packaged";
 
