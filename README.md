@@ -1,5 +1,7 @@
 # RichillCapital.TraderStudio.Desktop
 
+[![.NET WPF Continuous Integration](https://github.com/MengsyueAmaoTsai/TraderStudio.Desktop.Wpf/actions/workflows/ci.yml/badge.svg)](https://github.com/MengsyueAmaoTsai/TraderStudio.Desktop.Wpf/actions/workflows/ci.yml)
+
 ## Publish
 
 ```bash
