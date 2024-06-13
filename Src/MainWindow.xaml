@@ -47,6 +47,13 @@
                     <DataGridTextColumn Header="Name" Width="Auto" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Description" Width="*"  Binding="{Binding Description}"/>
                 </DataGrid.Columns>
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Details"/>
+                        <MenuItem Header="Delete"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
             
         </Grid>

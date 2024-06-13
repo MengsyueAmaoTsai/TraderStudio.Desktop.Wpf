@@ -81,16 +81,16 @@ public sealed record SignalSourceModel
 
 internal static class SignalSourceModelMapping
 {
-    internal static SignalSourceModel ToModel(this SignalSourceResponse response)
-    {
-        return new SignalSourceModel
+    internal static SignalSourceModel ToModel(
+        this SignalSourceResponse response) =>
+        new()
         {
             Id = response.Id,
             Name = response.Name,
             Description = response.Description
         };
-    }
 
-    internal static IEnumerable<SignalSourceModel> ToModels(this IEnumerable<SignalSourceResponse> responses) =>
-        responses.Select(response => response.ToModel());
+    internal static IEnumerable<SignalSourceModel> ToModels(
+        this IEnumerable<SignalSourceResponse> responses) =>
+        responses.Select(ToModel);
 }
