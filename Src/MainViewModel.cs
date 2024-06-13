@@ -7,6 +7,8 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 
 using RichillCapital.Domain.Common;
+using RichillCapital.TraderStudio.Desktop.Services;
+using RichillCapital.TraderStudio.Desktop.Services.Contracts.SignalSources;
 
 namespace RichillCapital.TraderStudio.Desktop;
 
@@ -14,6 +16,7 @@ public sealed partial class MainViewModel : ObservableObject
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly ILocalStorageManager _localFileStorage;
+    private readonly IApiService _apiService;
 
     public ObservableCollection<SignalSourceModel> SignalSources { get; } = [];
 
@@ -22,17 +25,12 @@ public sealed partial class MainViewModel : ObservableObject
 
     public MainViewModel(
         IServiceProvider serviceProvider,
-        ILocalStorageManager localFileStorage)
+        ILocalStorageManager localFileStorage,
+        IApiService apiService)
     {
         _serviceProvider = serviceProvider;
         _localFileStorage = localFileStorage;   
-
-        SignalSources.Add(new SignalSourceModel
-        {
-            Id = "1",
-            Name = "Signal Source 1",
-            Description = "Signal Source 1 Description"
-        });
+        _apiService = apiService;
     }
 
     [RelayCommand]
@@ -49,6 +47,27 @@ public sealed partial class MainViewModel : ObservableObject
 
         dialog.ShowDialog();
     }
+
+    [RelayCommand]
+    private async Task RefreshAsync()
+    {
+        SignalSources.Clear();
+
+        var result = await _apiService.ListSignalSourcesAsync(CancellationToken.None);
+
+        if (result.IsFailure)
+        {
+            MessageBox.Show($"{result.Error}");
+            return;
+        }
+
+        var models = result.Value.Items.ToModels();
+
+        foreach (var model in models)
+        {
+            SignalSources.Add(model);
+        }
+    }
 }
 
 public sealed record SignalSourceModel
@@ -58,4 +77,20 @@ public sealed record SignalSourceModel
     public required string Name { get; init; }
 
     public required string Description { get; init; }
+}
+
+internal static class SignalSourceModelMapping
+{
+    internal static SignalSourceModel ToModel(this SignalSourceResponse response)
+    {
+        return new SignalSourceModel
+        {
+            Id = response.Id,
+            Name = response.Name,
+            Description = response.Description
+        };
+    }
+
+    internal static IEnumerable<SignalSourceModel> ToModels(this IEnumerable<SignalSourceResponse> responses) =>
+        responses.Select(response => response.ToModel());
 }

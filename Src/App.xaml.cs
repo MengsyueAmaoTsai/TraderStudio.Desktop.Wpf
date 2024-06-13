@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 using RichillCapital.Logging;
 using RichillCapital.Storage;
+using RichillCapital.TraderStudio.Desktop.Services;
 
 namespace RichillCapital.TraderStudio.Desktop;
 
@@ -45,6 +46,9 @@ public partial class App : Application
         {
             // Infrastructure - File Storage
             services.AddLocalFileStorageManager();
+
+            // Infrastructure - API Service
+            services.AddApiService();
 
             // Presentation - MVVM
             services.AddScoped<MainWindow>();
