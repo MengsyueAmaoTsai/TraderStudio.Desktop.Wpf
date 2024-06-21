@@ -11,6 +11,16 @@ on:
       - master
       - dev
 
+env:
+  CAKE_FILE_PATH: ./build.cake
+  TARGET: Default
+  CONFIGURATION: Debug
+  WAP_PROJECT_DIRECTORY: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
+  CERTIFICATE_NAME: RichillCapital.TraderStudio.Desktop.pfx
+  WAP_PROJECT_PATH: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj
+  ARTIFACTS_DIRECTORY: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/AppPackages
+  APPLICATION_NAME: RichillCapital.TraderStudio.Desktop
+
 jobs:
   build:
     strategy:
@@ -18,17 +28,7 @@ jobs:
         targetPlatform: [x86, x64]
     
     runs-on: windows-latest
-    
-    env:
-      CAKE_FILE_PATH: ./build.cake
-      TARGET: Default
-      CONFIGURATION: Debug
 
-      WAP_PROJECT_DIRECTORY: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
-      CERTIFICATE_NAME: RichillCapital.TraderStudio.Desktop.pfx
-      WAP_PROJECT_PATH: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj
-      ARTIFACTS_DIRECTORY: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/AppPackages
-      APPLICATION_NAME: RichillCapital.TraderStudio.Desktop
 
     steps:
     - name: Checkout Repository
