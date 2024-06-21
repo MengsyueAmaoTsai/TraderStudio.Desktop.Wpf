@@ -9,7 +9,7 @@
   <Identity
     Name="060bba77-ee2c-4662-8ef9-374cb699de56"
     Publisher="CN=RichillCapital"
-    Version="1.0.0.0" />
+    Version="0.0.0.0" />
 
   <Properties>
     <DisplayName>RichillCapital.TraderStudio.Desktop.Package</DisplayName>

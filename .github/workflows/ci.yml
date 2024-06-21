@@ -1,11 +1,15 @@
-name: .NET WPF Continuous Integration
+name: RichillCapital.TraderStudio.Desktop CI
 
 on:
   push:
-    branches: [ "master" ]
-  
+    branches: 
+      - master
+      - dev
+
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
+      - dev
 
 jobs:
   build:
@@ -16,13 +20,18 @@ jobs:
     runs-on: windows-latest
     
     env:
-      Wap_Project_Directory: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
-      Wap_Project_Path: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj
-      App_Packages_Directory: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/AppPackages
-      Certificate_Name: RichillCapital.TraderStudio.Desktop.pfx
+      CAKE_FILE_PATH: ./build.cake
+      TARGET: Default
+      CONFIGURATION: Debug
+
+      WAP_PROJECT_DIRECTORY: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
+      CERTIFICATE_NAME: RichillCapital.TraderStudio.Desktop.pfx
+      WAP_PROJECT_PATH: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj
+      ARTIFACTS_DIRECTORY: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/AppPackages
+      APPLICATION_NAME: RichillCapital.TraderStudio.Desktop
 
     steps:
-    - name: Checkout
+    - name: Checkout Repository
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
@@ -31,32 +40,36 @@ jobs:
       uses: dotnet/nbgv@master
       id: nbgv
 
+    - name: Determine the Build Version
+      id: version
+      run: echo "::set-output name=version::$(git describe --tags --abbrev=0 || date +'%Y%m%d')-${{ steps.nbgv.outputs.GitCommitIdShort }}"
+
+    # - name: Update Version
+    #   run: |
+    #     [xml]$manifest = Get-Content "./$env:WAP_PROJECT_DIRECTORY/Package.appxmanifest"
+    #     $manifest.Package.Identity.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
+    #     $manifest.save("./$env:WAP_PROJECT_DIRECTORY/Package.appxmanifest")
+
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
-
-    - name: Update Version
-      run: |
-        [xml]$manifest = Get-Content "./$env:Wap_Project_Directory/Package.appxmanifest"
-        $manifest.Package.Identity.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
-        $manifest.save("./$env:Wap_Project_Directory/Package.appxmanifest")
 
     - name: Build and Tests with Cake Tool
       uses: cake-build/cake-action@v2
       with:
-        script-path: build.cake
-        target: default
+        script-path: ${{ env.CAKE_FILE_PATH }}
+        target: ${{ env.TARGET }}
         verbosity: Diagnostic
         arguments: |
-          configuration: Debug
+          configuration: ${{ env.CONFIGURATION }}
 
     - name: Decode Signing Certificate
       run: |
         $certificateContent = [System.Convert]::FromBase64String("${{ secrets.BASE64_CERTIFICATE }}")
-        $certificatePath = Join-Path -Path $env:Wap_Project_Directory -ChildPath $env:Certificate_Name
+        $certificatePath = Join-Path -Path $env:WAP_PROJECT_DIRECTORY -ChildPath $env:CERTIFICATE_NAME
         [IO.File]::WriteAllBytes("$certificatePath", $certificateContent)
         
     - name: Publish Application Package
-      run: msbuild $env:Wap_Project_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:Certificate_Name /p:PackageCertificatePassword=${{ secrets.CERTIFICATE_PASSWORD}}
+      run: msbuild $env:WAP_PROJECT_PATH /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:CERTIFICATE_NAME /p:PackageCertificatePassword=${{ secrets.CERTIFICATE_PASSWORD}}
       env:
         AppxBundle: Never
         BuildMode: SideloadOnly
@@ -64,10 +77,10 @@ jobs:
         TargetPlatform: ${{ matrix.targetPlatform }}
     
     - name: Remove Signing Certificate
-      run: Remove-Item -Path $env:Wap_Project_Directory/$env:Certificate_Name
+      run: Remove-Item -Path $env:WAP_PROJECT_DIRECTORY/$env:CERTIFICATE_NAME
   
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: trader-studio-desktop-${{ matrix.targetPlatform }}
-        path: ${{ env.App_Packages_Directory}}
+        name: ${{ env.APPLICATION_NAME }}-${{ steps.version.outputs.version }}-${{ matrix.targetPlatform }}-${{ env.CONFIGURATION}}
+        path: ${{ env.ARTIFACTS_DIRECTORY}}
