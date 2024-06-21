@@ -1,0 +1,80 @@
+name: RichillCapital.TraderStudio.Desktop CD
+
+on:
+  push:
+    branches: 
+      - master
+      - dev
+
+  pull_request:
+    branches:
+      - master
+      - dev
+
+env:
+  CAKE_FILE_PATH: ./build.cake
+  TARGET: Default
+  WAP_PROJECT_DIRECTORY: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
+  CERTIFICATE_NAME: RichillCapital.TraderStudio.Desktop.pfx
+  WAP_PROJECT_PATH: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj
+
+jobs:
+  deploy:
+    strategy:
+      matrix:
+        targetPlatform: [x86, x64]
+        channel: [ProductionStore, ProductionSideload, Development]
+
+        include: 
+          - channel: Development
+            ChannelName: Development
+            Configuration: Debug
+            MsixPackageId: RichillCapital.TraderStudio.Desktop.Dev
+            MsixPublisherId: CN=RichillCapital
+            MsixPackageDisplayName: TraderStudio Desktop (Dev)
+        
+          - channel: ProductionSideload
+            ChannelName: ProductionSideload
+            Configuration: Release
+            MsixPackageId: RichillCapital.TraderStudio.Desktop.ProductionSideload
+            MsixPublisherId: CN=RichillCapital
+            MsixPackageDisplayName: TraderStudio Desktop
+        
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Build and Tests with Cake Tool
+      uses: cake-build/cake-action@v2
+      with:
+        script-path: ${{ env.CAKE_FILE_PATH }}
+        target: ${{ env.TARGET }}
+        verbosity: Diagnostic
+        arguments: |
+            configuration: ${{ matrix.Configuration }}
+        
+    - name: Decode Signing Certificate
+      run: |
+        $certificateContent = [System.Convert]::FromBase64String("${{ secrets.BASE64_CERTIFICATE }}")
+        $certificatePath = Join-Path -Path $env:WAP_PROJECT_DIRECTORY -ChildPath $env:CERTIFICATE_NAME
+        [IO.File]::WriteAllBytes("$certificatePath", $certificateContent)    
+
+    - name: Publish Application Package ${{ matrix.ChannelName }}
+      run: |
+        msbuild $env:WAP_PROJECT_PATH /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:CERTIFICATE_NAME /p:PackageCertificatePassword=${{ secrets.CERTIFICATE_PASSWORD }}
+      if: matrix.ChannelName != 'Prod_Store'
+      env:
+        AppxBundle: Never
+        # AppInstallerUri: ${{ matrix.DistributionUrl }}
+        BuildMode: SideloadOnly
+        Configuration: ${{ matrix.Configuration }}
+        GenerateAppInstallerFile: True
+        TargetPlatform: ${{ matrix.targetplatform }}
+
+    - name: Remove Signing Certificate
+      run: Remove-Item -Path $env:WAP_PROJECT_DIRECTORY/$env:CERTIFICATE_NAME
+            
