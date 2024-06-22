@@ -1,6 +1,8 @@
 # RichillCapital.TraderStudio.Desktop
 
-[![.NET WPF Continuous Integration](https://github.com/MengsyueAmaoTsai/TraderStudio.Desktop.Wpf/actions/workflows/ci.yml/badge.svg)](https://github.com/MengsyueAmaoTsai/TraderStudio.Desktop.Wpf/actions/workflows/ci.yml)
+[![RichillCapital.TraderStudio.Desktop CI](https://github.com/MengsyueAmaoTsai/TraderStudio.Desktop.Wpf/actions/workflows/ci.yml/badge.svg)](https://github.com/MengsyueAmaoTsai/TraderStudio.Desktop.Wpf/actions/workflows/ci.yml)
+
+[![RichillCapital.TraderStudio.Desktop CD](https://github.com/MengsyueAmaoTsai/TraderStudio.Desktop.Wpf/actions/workflows/cd.yml/badge.svg)](https://github.com/MengsyueAmaoTsai/TraderStudio.Desktop.Wpf/actions/workflows/cd.yml)
 
 ## Publish
 
