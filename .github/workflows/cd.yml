@@ -1,0 +1,89 @@
+name: RichillCapital.TraderStudio.Desktop CD
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  MSIX_PACKAGE_ID: RichillCapital.TraderStudio.Desktop.Development
+  MSIX_PUBLISHER_ID: CN=RichillCapital
+  MSIX_PACKAGE_DISPLAY_NAME: RichillCapital TraderStudio (Development)
+
+  CAKE_FILE_PATH: ./build.cake
+  TARGET: Default
+  CONFIGURATION: Debug
+  WAP_PROJECT_DIRECTORY: ./Packaging/RichillCapital.TraderStudio.Desktop.Package
+  CERTIFICATE_NAME: RichillCapital.TraderStudio.Desktop.pfx
+  WAP_PROJECT_PATH: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/RichillCapital.TraderStudio.Desktop.Package.wapproj
+  ARTIFACTS_DIRECTORY: ./Packaging/RichillCapital.TraderStudio.Desktop.Package/AppPackages
+  APPLICATION_NAME: RichillCapital.TraderStudio.Desktop
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        targetPlatform: [x86, x64]
+    
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Use Nerdbank.GitVersioning 
+      uses: dotnet/nbgv@master
+      id: nbgv
+
+    - name: Get version
+      id: get_version
+      run: |
+        $version = (git describe --tags --abbrev=0) -replace '-.*', ''
+        if (-not $version) {
+          $version = (Get-Date -Format 'yyyyMMdd') + "-${{ steps.nbgv.outputs.GitCommitIdShort }}"
+        }
+        echo "::set-output name=version::$version"
+        
+    - name: Update Manifest Version
+      run: |
+        echo "Updating manifest version to ${{ steps.get_version.outputs.version }}"
+        [xml]$manifest = Get-Content ".\$env:WAP_PROJECT_DIRECTORY\Package.appxmanifest"
+        $manifest.Package.Identity.Version = "${{ steps.get_version.outputs.version }}"
+        $manifest.Package.Identity.Name = "${{ env.MSIX_PACKAGE_ID }}"
+        $manifest.Package.Identity.Publisher = "${{ env.MSIX_PUBLISHER_ID }}"
+        $manifest.Package.Properties.DisplayName = "${{ env.MSIX_PACKAGE_DISPLAY_NAME }}"
+        $manifest.Package.Applications.Application.VisualElements.DisplayName = "${{ env.MSIX_PACKAGE_DISPLAY_NAME }}"
+        $manifest.save(".\$env:WAP_PROJECT_DIRECTORY\Package.appxmanifest")
+
+    - name: Setup MSBuild 
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build and Tests with Cake Tool
+      uses: cake-build/cake-action@v2
+      with:
+        script-path: ${{ env.CAKE_FILE_PATH }}
+        target: ${{ env.TARGET }}
+        verbosity: Diagnostic
+        arguments: |
+          configuration: ${{ env.CONFIGURATION }}
+
+    - name: Decode Signing Certificate
+      run: |
+        $certificateContent = [System.Convert]::FromBase64String("${{ secrets.BASE64_CERTIFICATE }}")
+        $certificatePath = Join-Path -Path $env:WAP_PROJECT_DIRECTORY -ChildPath $env:CERTIFICATE_NAME
+        [IO.File]::WriteAllBytes("$certificatePath", $certificateContent)
+        
+    - name: Publish Application Package
+      run: msbuild $env:WAP_PROJECT_PATH /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:CERTIFICATE_NAME /p:PackageCertificatePassword=${{ secrets.CERTIFICATE_PASSWORD}}
+      env:
+        AppxBundle: Never
+        BuildMode: SideloadOnly
+        Configuration: Debug
+        TargetPlatform: ${{ matrix.targetPlatform }}
+        GenerateAppInstallerFile: True
+    
+    - name: Remove Signing Certificate
+      run: Remove-Item -Path $env:WAP_PROJECT_DIRECTORY/$env:CERTIFICATE_NAME
+  
