@@ -24,6 +24,21 @@ jobs:
     strategy:
       matrix:
         targetPlatform: [x86, x64]
+        channel: [Development, ProductionSideload]
+        include:
+            - channel: Development
+              ChannelName: Development
+              Configuration: Debug
+              MsixPublisherId: CN=RichillCapital
+              MsixPackageId: RichillCapital.TraderStudio.Desktop.Development
+              MsixPackageDisplayName: RichillCapital TraderStudio (Development)
+
+            - channel: ProductionSideload
+              ChannelName: ProductionSideload
+              Configuration: Release
+              MsixPublisherId: CN=RichillCapital
+              MsixPackageId: RichillCapital.TraderStudio.Desktop.Production
+              MsixPackageDisplayName: RichillCapital TraderStudio (Production)
     
     runs-on: windows-latest
 
@@ -37,8 +52,8 @@ jobs:
       uses: dotnet/nbgv@master
       id: nbgv
 
-    - name: Get version
-      id: get_version
+    - name: Get Deploy Version
+      id: version
       run: |
         $version = (git describe --tags --abbrev=0) -replace '-.*', ''
         if (-not $version) {
@@ -48,13 +63,13 @@ jobs:
         
     - name: Update Manifest Version
       run: |
-        echo "Updating manifest version to ${{ steps.get_version.outputs.version }}"
+        echo "Updating manifest version to ${{ steps.version.outputs.version }}"
         [xml]$manifest = Get-Content ".\$env:WAP_PROJECT_DIRECTORY\Package.appxmanifest"
-        $manifest.Package.Identity.Version = "${{ steps.get_version.outputs.version }}"
-        $manifest.Package.Identity.Name = "${{ env.MSIX_PACKAGE_ID }}"
-        $manifest.Package.Identity.Publisher = "${{ env.MSIX_PUBLISHER_ID }}"
-        $manifest.Package.Properties.DisplayName = "${{ env.MSIX_PACKAGE_DISPLAY_NAME }}"
-        $manifest.Package.Applications.Application.VisualElements.DisplayName = "${{ env.MSIX_PACKAGE_DISPLAY_NAME }}"
+        $manifest.Package.Identity.Version = "${{ steps.version.outputs.version }}"
+        $manifest.Package.Identity.Name = "${{ matrix.MsixPackageId }}"
+        $manifest.Package.Identity.Publisher = "${{ matrix.MsixPublisherId }}"
+        $manifest.Package.Properties.DisplayName = "${{ matrix.MsixPackageDisplayName }}"
+        $manifest.Package.Applications.Application.VisualElements.DisplayName = "${{ matrix.MsixPackageDisplayName }}"
         $manifest.save(".\$env:WAP_PROJECT_DIRECTORY\Package.appxmanifest")
 
     - name: Setup MSBuild 
@@ -75,13 +90,12 @@ jobs:
         $certificatePath = Join-Path -Path $env:WAP_PROJECT_DIRECTORY -ChildPath $env:CERTIFICATE_NAME
         [IO.File]::WriteAllBytes("$certificatePath", $certificateContent)
         
-    - name: Publish Application Package
-      run: msbuild $env:WAP_PROJECT_PATH /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:CERTIFICATE_NAME /p:PackageCertificatePassword=${{ secrets.CERTIFICATE_PASSWORD}}
+    - name: Publish Application Package (${{ matrix.ChannelName }})
+      run: msbuild $env:WAP_PROJECT_PATH /p:Platform=${{ matrix.targetPlatform}} /p:Configuration=${{ matrix.Configuration}} /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:CERTIFICATE_NAME /p:PackageCertificatePassword=${{ secrets.CERTIFICATE_PASSWORD}}
+      if: matrix.channelName != 'ProductionStore'
       env:
         AppxBundle: Never
         BuildMode: SideloadOnly
-        Configuration: Debug
-        TargetPlatform: ${{ matrix.targetPlatform }}
         GenerateAppInstallerFile: True
     
     - name: Remove Signing Certificate
