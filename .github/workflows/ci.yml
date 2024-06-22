@@ -29,7 +29,6 @@ jobs:
     
     runs-on: windows-latest
 
-
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
@@ -44,13 +43,7 @@ jobs:
       id: version
       run: echo "::set-output name=version::$(git describe --tags --abbrev=0 || date +'%Y%m%d')-${{ steps.nbgv.outputs.GitCommitIdShort }}"
 
-    # - name: Update Version
-    #   run: |
-    #     [xml]$manifest = Get-Content "./$env:WAP_PROJECT_DIRECTORY/Package.appxmanifest"
-    #     $manifest.Package.Identity.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
-    #     $manifest.save("./$env:WAP_PROJECT_DIRECTORY/Package.appxmanifest")
-
-    - name: Setup MSBuild.exe
+    - name: Setup MSBuild 
       uses: microsoft/setup-msbuild@v2
 
     - name: Build and Tests with Cake Tool
