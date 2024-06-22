@@ -100,4 +100,6 @@ jobs:
     
     - name: Remove Signing Certificate
       run: Remove-Item -Path $env:WAP_PROJECT_DIRECTORY/$env:CERTIFICATE_NAME
-  
+    
+    - name: Create Archive
+      run: Compress-Archive -Path $env:ARTIFACTS_DIRECTORY\* -DestinationPath $env:ARTIFACTS_DIRECTORY\AppPackages.zip
