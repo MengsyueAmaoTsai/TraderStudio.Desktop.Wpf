@@ -29,9 +29,21 @@ Task("Build")
             });
     });
 
-Task("Test")
+Task("UnitTests")
     .Does(() =>
     {
+        var testProjects = GetFiles("./**/*.UnitTests.csproj");
+
+        foreach (var testProject in testProjects)
+        {
+            DotNetTest(
+                testProject.FullPath,
+                new DotNetTestSettings
+                {
+                    Configuration = buildConfiguration,
+                    NoRestore = true,
+                });
+        }
     });
 
 
@@ -39,7 +51,7 @@ Task("Default")
     .IsDependentOn("Clean")
     .IsDependentOn("Restore")
     .IsDependentOn("Build")
-    .IsDependentOn("Test");
+    .IsDependentOn("UnitTests");
 
 var target = Argument("target", "Default");
 RunTarget(target);

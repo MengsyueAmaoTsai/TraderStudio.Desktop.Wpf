@@ -14,12 +14,16 @@
   <ItemGroup>
     <Compile Remove="Libs\**" />
     <Compile Remove="Packaging\**" />
+    <Compile Remove="Tests\**" />
     <EmbeddedResource Remove="Libs\**" />
     <EmbeddedResource Remove="Packaging\**" />
+    <EmbeddedResource Remove="Tests\**" />
     <None Remove="Libs\**" />
     <None Remove="Packaging\**" />
+    <None Remove="Tests\**" />
     <Page Remove="Libs\**" />
     <Page Remove="Packaging\**" />
+    <Page Remove="Tests\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />

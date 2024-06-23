@@ -19,7 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Identity", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Logging", "Libs\RichillCapital.Logging\RichillCapital.Logging.csproj", "{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Storage", "Libs\RichillCapital.Storage\RichillCapital.Storage.csproj", "{FEC5B61A-9894-4F3D-9AF0-0DBBDB425EE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Storage", "Libs\RichillCapital.Storage\RichillCapital.Storage.csproj", "{FEC5B61A-9894-4F3D-9AF0-0DBBDB425EE7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3C408999-1877-4397-A15E-2C5EA77E1C13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.TraderStudio.Desktop.UnitTests", "Tests\RichillCapital.TraderStudio.Desktop.UnitTests\RichillCapital.TraderStudio.Desktop.UnitTests.csproj", "{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -185,6 +189,26 @@ Global
 		{FEC5B61A-9894-4F3D-9AF0-0DBBDB425EE7}.Release|x64.Build.0 = Release|Any CPU
 		{FEC5B61A-9894-4F3D-9AF0-0DBBDB425EE7}.Release|x86.ActiveCfg = Release|Any CPU
 		{FEC5B61A-9894-4F3D-9AF0-0DBBDB425EE7}.Release|x86.Build.0 = Release|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Debug|ARM.Build.0 = Debug|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Debug|x64.Build.0 = Debug|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Debug|x86.Build.0 = Debug|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Release|ARM.Build.0 = Release|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Release|ARM64.Build.0 = Release|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Release|x64.ActiveCfg = Release|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Release|x64.Build.0 = Release|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Release|x86.ActiveCfg = Release|Any CPU
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -196,6 +220,7 @@ Global
 		{3685CEEB-D71C-4999-9A5B-2A374699F87D} = {931BE277-B451-4916-A9D8-082361207B4C}
 		{4ADAAAB6-3CC2-43F2-B244-5A5592D2584B} = {931BE277-B451-4916-A9D8-082361207B4C}
 		{FEC5B61A-9894-4F3D-9AF0-0DBBDB425EE7} = {931BE277-B451-4916-A9D8-082361207B4C}
+		{5B92D5E5-A0CC-4AAA-92F0-55753D9940D2} = {3C408999-1877-4397-A15E-2C5EA77E1C13}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94EDDA9C-8525-4AF9-9E00-A8B97449AC77}
