@@ -52,12 +52,8 @@ public partial class App : Application
 
             // Presentation - MVVM
             services.AddScoped<MainWindow>();
-            
-            services.AddTransient<SignInDialog>();
-            services.AddTransient<AboutDialog>();
-            
+
             services.AddScoped<MainViewModel>();
-            services.AddTransient<AboutViewModel>();
 
             services.AddSingleton<WeakReferenceMessenger>();
             services.AddSingleton<IMessenger, WeakReferenceMessenger>(provider =>
