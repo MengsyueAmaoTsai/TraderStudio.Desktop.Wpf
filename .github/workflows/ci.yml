@@ -34,5 +34,6 @@ jobs:
 
     - name: Run tests
       run: |
+        dotnet test ./tests/RichillCapital.TraderStudio.Desktop.ArchitectureTests/RichillCapital.TraderStudio.Desktop.ArchitectureTests.csproj -c Debug --no-restore --verbosity normal
         dotnet test ./tests/RichillCapital.TraderStudio.Desktop.UnitTests/RichillCapital.TraderStudio.Desktop.UnitTests.csproj -c Debug --no-restore --verbosity normal
     

@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packaging", "packaging", "{
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "RichillCapital.TraderStudio.Desktop.Packaging", "packaging\RichillCapital.TraderStudio.Desktop.Packaging\RichillCapital.TraderStudio.Desktop.Packaging.wapproj", "{7609B36C-1259-4703-8FFC-3129A4D78787}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.TraderStudio.Desktop.ArchitectureTests", "tests\RichillCapital.TraderStudio.Desktop.ArchitectureTests\RichillCapital.TraderStudio.Desktop.ArchitectureTests.csproj", "{B02455BB-F1EA-4C11-97DD-892E80916E08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,26 @@ Global
 		{7609B36C-1259-4703-8FFC-3129A4D78787}.Release|x86.ActiveCfg = Release|x86
 		{7609B36C-1259-4703-8FFC-3129A4D78787}.Release|x86.Build.0 = Release|x86
 		{7609B36C-1259-4703-8FFC-3129A4D78787}.Release|x86.Deploy.0 = Release|x86
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Debug|x64.Build.0 = Debug|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Debug|x86.Build.0 = Debug|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Release|ARM.Build.0 = Release|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Release|ARM64.Build.0 = Release|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Release|x64.ActiveCfg = Release|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Release|x64.Build.0 = Release|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Release|x86.ActiveCfg = Release|Any CPU
+		{B02455BB-F1EA-4C11-97DD-892E80916E08}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +198,7 @@ Global
 		{3C4A4906-BB49-4709-8BBE-8C858020F873} = {7B914D43-C2F6-4C1F-BC5D-CBDEBAFD4EAE}
 		{D59D10CF-702D-47C9-ABB5-1DAB106BFC6F} = {7B914D43-C2F6-4C1F-BC5D-CBDEBAFD4EAE}
 		{7609B36C-1259-4703-8FFC-3129A4D78787} = {597E46E8-0117-41B4-AB73-803290EC566A}
+		{B02455BB-F1EA-4C11-97DD-892E80916E08} = {952CEA83-E82B-4AF7-BDAA-48460FD47194}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {778EFB86-35F4-4C51-B310-FDEF68602A3C}
