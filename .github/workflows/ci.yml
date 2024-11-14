@@ -29,9 +29,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build the solution
+    - name: Build the WPF application
       run: dotnet build ./src/RichillCapital.TraderStudio.Desktop/RichillCapital.TraderStudio.Desktop.csproj -c Debug --no-restore
 
     - name: Run tests
-      run: dotnet test ./tests/RichillCapital.TraderStudio.Desktop.UnitTests/RichillCapital.TraderStudio.Desktop.UnitTests.csproj -c Debug --no-restore --no-build --verbosity normal
+      run: |
+        dotnet test ./tests/RichillCapital.TraderStudio.Desktop.UnitTests/RichillCapital.TraderStudio.Desktop.UnitTests.csproj -c Debug --no-restore --verbosity normal
     
