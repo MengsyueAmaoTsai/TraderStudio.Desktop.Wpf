@@ -1,27 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
-namespace RichillCapital.TraderStudio.Desktop.Views
+using RichillCapital.TraderStudio.Desktop.ViewModels;
+
+namespace RichillCapital.TraderStudio.Desktop.Views;
+
+public sealed partial class NewSignalSourceDialog : Window
 {
-    /// <summary>
-    /// Interaction logic for NewSignalSourceDialog.xaml
-    /// </summary>
-    public partial class NewSignalSourceDialog : Window
+    public NewSignalSourceDialog(NewSignalSourceViewModel viewModel)
     {
-        public NewSignalSourceDialog()
-        {
-            InitializeComponent();
-        }
+        DataContext = viewModel;
+        InitializeComponent();
     }
 }
