@@ -9,10 +9,11 @@
         mc:Ignorable="d"
         Title="MainWindow" 
         WindowStartupLocation="CenterScreen"
-        Height="450" Width="800">
+        d:Height="450" 
+        d:Width="800">
     <Grid>
         <Menu>
-            <MenuItem Header="MenuItem1">
+            <MenuItem Header="Modules">
                 <MenuItem 
                     Header="Signal sources"
                     Command="{Binding ShowSignalSourcesWindowCommand}"/>

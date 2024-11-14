@@ -6,11 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RichillCapital.TraderStudio.Desktop.Views"
         xmlns:viewModels="clr-namespace:RichillCapital.TraderStudio.Desktop.ViewModels"
-        mc:Ignorable="d"
+        mc:Ignorable="d" d:Height="450" d:Width="800"
+        Title="New signal source" 
         WindowStartupLocation="CenterOwner"
-        Title="NewSignalSourceDialog" 
-        Height="450" 
-        Width="800">
+        Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

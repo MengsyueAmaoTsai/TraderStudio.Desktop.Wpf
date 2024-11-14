@@ -8,9 +8,9 @@
         xmlns:viewModels="clr-namespace:RichillCapital.TraderStudio.Desktop.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="SignalSourcesWindow" 
-        Height="450" 
-        Width="800">
+        Title="Signal sources" 
+        d:Height="450" 
+        d:Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

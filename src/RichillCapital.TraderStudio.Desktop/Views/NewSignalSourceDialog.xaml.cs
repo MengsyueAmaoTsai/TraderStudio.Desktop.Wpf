@@ -10,5 +10,8 @@ public sealed partial class NewSignalSourceDialog : Window
     {
         DataContext = viewModel;
         InitializeComponent();
+
+        Height = SystemParameters.PrimaryScreenHeight * 0.4;
+        Width = SystemParameters.PrimaryScreenWidth * 0.4;
     }
 }
