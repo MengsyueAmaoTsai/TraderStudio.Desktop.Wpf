@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using RichillCapital.TraderStudio.Desktop.Services;
 using RichillCapital.TraderStudio.Desktop.ViewModels;
 using RichillCapital.TraderStudio.Desktop.Views;
 
@@ -42,14 +43,43 @@ public sealed partial class App : Application
             configurationBuilder.AddUserSecrets(typeof(App).Assembly))
         .ConfigureServices((hostContext, services) =>
         {
-            services.AddSingleton<MainWindow>();
+            services.AddSingleton<IWindowService, WindowService>();
 
-            services.AddSingleton<MainWindowViewModel>();
-
-            services.AddSingleton<WeakReferenceMessenger>();
-            services.AddSingleton<IMessenger, WeakReferenceMessenger>(provider =>
-                provider.GetRequiredService<WeakReferenceMessenger>());
+            services.AddViews();
+            services.AddViewModels();
+            
+            services.AddCommunityToolkitMvvm();
 
             services.AddSingleton(_ => Current.Dispatcher);
         });
+}
+
+internal static class ServiceExtensions
+{
+    internal static IServiceCollection AddViews(this IServiceCollection services)
+    {
+        services.AddSingleton<MainWindow>();
+
+        services.AddTransient<SignalSourcesWindow>();
+
+        return services;
+    }
+
+    internal static IServiceCollection AddViewModels(this IServiceCollection services)
+    {
+        services.AddSingleton<MainViewModel>();
+     
+        services.AddTransient<SignalSourcesViewModel>();
+        
+        return services;
+    }
+
+    internal static IServiceCollection AddCommunityToolkitMvvm(this IServiceCollection services)
+    {
+        services.AddSingleton<WeakReferenceMessenger>();
+        services.AddSingleton<IMessenger, WeakReferenceMessenger>(provider =>
+            provider.GetRequiredService<WeakReferenceMessenger>());
+
+        return services;
+    }
 }

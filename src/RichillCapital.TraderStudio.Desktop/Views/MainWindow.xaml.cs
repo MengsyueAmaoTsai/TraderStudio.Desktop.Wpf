@@ -7,7 +7,7 @@ namespace RichillCapital.TraderStudio.Desktop.Views;
 
 public sealed partial class MainWindow : Window
 {
-    public MainWindow(MainWindowViewModel viewModel)
+    public MainWindow(MainViewModel viewModel)
     {
         DataContext = viewModel;
         InitializeComponent();
