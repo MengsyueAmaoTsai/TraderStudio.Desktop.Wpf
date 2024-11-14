@@ -62,6 +62,7 @@ internal static class ServiceExtensions
 
         services.AddTransient<SignalSourcesWindow>();
         services.AddTransient<NewSignalSourceDialog>();
+        services.AddTransient<SignalSourceDetailsDialog>();
 
         return services;
     }
@@ -72,6 +73,7 @@ internal static class ServiceExtensions
      
         services.AddTransient<SignalSourcesViewModel>();
         services.AddTransient<NewSignalSourceViewModel>();
+        services.AddSingleton<SignalSourceDetailsViewModel>();
 
         return services;
     }
