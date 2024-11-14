@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:RichillCapital.TraderStudio.Desktop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>
