@@ -11,6 +11,7 @@ public sealed partial class MainViewModel : ViewModel
 
     public MainViewModel(
         IWindowService windowService)
+        : base(windowService)
     {
         _windowService = windowService;
     }

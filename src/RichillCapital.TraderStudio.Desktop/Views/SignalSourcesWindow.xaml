@@ -12,9 +12,18 @@
         Height="450" 
         Width="800">
     <Grid>
-        <DataGrid ItemsSource="{Binding SignalSources}" 
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <Button Grid.Row="0" Content="New signal source" Command="{Binding NewSignalSourceCommand}"/>
+        
+        <DataGrid 
+            Grid.Row="1"
+            ItemsSource="{Binding SignalSources}" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>

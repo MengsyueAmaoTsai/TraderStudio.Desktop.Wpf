@@ -1,7 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Data;
 
+using CommunityToolkit.Mvvm.Input;
+
 using RichillCapital.TraderStudio.Desktop.Models;
+using RichillCapital.TraderStudio.Desktop.Services;
+using RichillCapital.TraderStudio.Desktop.Views;
 
 namespace RichillCapital.TraderStudio.Desktop.ViewModels;
 
@@ -26,7 +30,8 @@ public sealed partial class SignalSourcesViewModel : ViewModel
         },
     ];
 
-    public SignalSourcesViewModel()
+    public SignalSourcesViewModel(IWindowService windowService) 
+        : base(windowService)
     {
         BindingOperations.EnableCollectionSynchronization(SignalSources, new object());
 
@@ -38,4 +43,10 @@ public sealed partial class SignalSourcesViewModel : ViewModel
     }
 
     public ObservableCollection<SignalSourceItem> SignalSources { get; } = [];
+
+    [RelayCommand]
+    private void NewSignalSource()
+    {
+        _windowService.ShowDialog<NewSignalSourceDialog>();
+    }
 }
