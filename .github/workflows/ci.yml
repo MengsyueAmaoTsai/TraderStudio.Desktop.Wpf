@@ -30,8 +30,8 @@ jobs:
       run: dotnet restore
 
     - name: Build the solution
-      run: dotnet build ./RichillCapital.TraderStudio.Desktop.sln -c Debug --no-restore
+      run: dotnet build ./src/RichillCapital.TraderStudio.Desktop/RichillCapital.TraderStudio.Desktop.csproj -c Debug --no-restore
 
     - name: Run tests
-      run: dotnet test ./RichillCapital.TraderStudio.Desktop.sln -c Debug --no-restore --no-build
+      run: dotnet test ./tests/RichillCapital.TraderStudio.Desktop.UnitTests/RichillCapital.TraderStudio.Desktop.UnitTests.csproj -c Debug --no-restore --no-build --verbosity normal
     
