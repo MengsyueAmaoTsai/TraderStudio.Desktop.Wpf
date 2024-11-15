@@ -16,8 +16,16 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-        <Button Grid.Row="0" Content="New signal source" Command="{Binding NewSignalSourceCommand}"/>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="New signal source" Command="{Binding NewSignalSourceCommand}"/>
+            <Button Grid.Column="1" Content="Upload historical data" Command="{Binding UploadHistoricalDataCommand}"/>
+        </Grid>
         
         <DataGrid 
             Grid.Row="1"

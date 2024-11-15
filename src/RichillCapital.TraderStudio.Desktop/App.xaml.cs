@@ -45,6 +45,8 @@ public sealed partial class App : Application
         {
             services.AddSingleton<IWindowService, WindowService>();
 
+            services.AddTransient<ITradingViewExportedFileService, TradingViewExportedFileService>();
+
             services.AddViews();
             services.AddViewModels();
             
