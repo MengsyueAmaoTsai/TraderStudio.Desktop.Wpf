@@ -10,5 +10,8 @@ public sealed partial class InstrumentsWindow : Window
     {
         DataContext = viewModel;
         InitializeComponent();
+
+        Height = SystemParameters.PrimaryScreenHeight * 0.8;
+        Width = SystemParameters.PrimaryScreenWidth * 0.8;
     }
 }

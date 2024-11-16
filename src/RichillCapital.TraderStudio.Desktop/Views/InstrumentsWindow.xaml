@@ -7,8 +7,31 @@
         xmlns:local="clr-namespace:RichillCapital.TraderStudio.Desktop.Views"
         xmlns:viewModels="clr-namespace:RichillCapital.TraderStudio.Desktop.ViewModels"
         mc:Ignorable="d"
-        Title="InstrumentsWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Instruments" 
+        d:Height="450" 
+        d:Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         
+        <Button 
+            Grid.Row="0"
+            Content="New instrument"/>
+        
+        <DataGrid 
+            Grid.Row="1"
+            ItemsSource="{Binding Instruments}"
+            AutoGenerateColumns="False" 
+            IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Symbol" />
+                <DataGridTextColumn Header="Description" />
+                <DataGridTextColumn Header="Exchange" />
+                <DataGridTextColumn Header="Type" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
