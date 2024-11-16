@@ -15,6 +15,10 @@
         <Menu>
             <MenuItem Header="Modules">
                 <MenuItem 
+                    Header="Instruments"
+                    Command="{Binding ShowInstrumentsWindowCommand}"/>
+                
+                <MenuItem 
                     Header="Signal sources"
                     Command="{Binding ShowSignalSourcesWindowCommand}"/>
             </MenuItem>

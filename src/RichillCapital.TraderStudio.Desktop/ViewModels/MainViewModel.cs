@@ -17,5 +17,8 @@ public sealed partial class MainViewModel : ViewModel
     }
 
     [RelayCommand]
+    private void ShowInstrumentsWindow() => _windowService.ShowWindow<InstrumentsWindow>();
+
+    [RelayCommand]
     private void ShowSignalSourcesWindow() => _windowService.ShowWindow<SignalSourcesWindow>();
 }
