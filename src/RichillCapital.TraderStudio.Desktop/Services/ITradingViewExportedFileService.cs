@@ -95,12 +95,22 @@ internal sealed class TradingViewExportedFileService : ITradingViewExportedFileS
 
     public Result ReadPerformanceSummary(string filePath)
     {
-        throw new NotImplementedException();
+        if (!FilePatterns.PerformanceSummary.IsMatch(filePath))
+        {
+            return Result.Failure(Error.Invalid("Invalid file name"));
+        }
+
+        return Result.Success;
     }
 
     public Result ReadProperties(string filePath)
     {
-        throw new NotImplementedException();
+        if (!FilePatterns.Properties.IsMatch(filePath))
+        {
+            return Result.Failure(Error.Invalid("Invalid file name"));
+        }
+
+        return Result.Success;
     }
 }
 

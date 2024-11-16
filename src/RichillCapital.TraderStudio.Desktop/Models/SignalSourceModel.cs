@@ -1,6 +1,6 @@
 ﻿namespace RichillCapital.TraderStudio.Desktop.Models;
 
-public sealed record SignalSourceItem
+public sealed record SignalSourceModel
 {
     public required string Id { get; init; }
     public required string Name { get; init; }

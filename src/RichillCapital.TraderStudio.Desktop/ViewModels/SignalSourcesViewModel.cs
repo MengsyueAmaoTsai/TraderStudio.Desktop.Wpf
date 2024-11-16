@@ -16,7 +16,7 @@ namespace RichillCapital.TraderStudio.Desktop.ViewModels;
 
 public sealed partial class SignalSourcesViewModel : ViewModel
 {
-    private static readonly List<SignalSourceItem> _inMemorySignalSources = [
+    private static readonly List<SignalSourceModel> _inMemorySignalSources = [
         new()
         {
             Id = "TV-BINANCE:ETHUSDT.P-M15-PL-001",
@@ -45,7 +45,7 @@ public sealed partial class SignalSourcesViewModel : ViewModel
         }
     }
 
-    public ObservableCollection<SignalSourceItem> SignalSources { get; } = [];
+    public ObservableCollection<SignalSourceModel> SignalSources { get; } = [];
 
     [RelayCommand]
     private void NewSignalSource()

@@ -62,6 +62,8 @@ internal static class ServiceExtensions
     {
         services.AddSingleton<MainWindow>();
 
+        services.AddTransient<InstrumentsWindow>();
+        
         services.AddTransient<SignalSourcesWindow>();
         services.AddTransient<NewSignalSourceDialog>();
         services.AddTransient<SignalSourceDetailsDialog>();
@@ -73,6 +75,8 @@ internal static class ServiceExtensions
     {
         services.AddSingleton<MainViewModel>();
      
+        services.AddTransient<InstrumentsViewModel>();
+
         services.AddTransient<SignalSourcesViewModel>();
         services.AddTransient<NewSignalSourceViewModel>();
         services.AddSingleton<SignalSourceDetailsViewModel>();
