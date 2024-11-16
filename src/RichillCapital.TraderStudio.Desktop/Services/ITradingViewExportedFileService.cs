@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
+using Microsoft.VisualBasic.FileIO;
+
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 
@@ -10,6 +12,8 @@ namespace RichillCapital.TraderStudio.Desktop.Services;
 public interface ITradingViewExportedFileService
 {
     Result<IEnumerable<TradingViewTradeRecord>> ReadListOfTrades(string filePath);
+    Result ReadProperties(string filePath);
+    Result ReadPerformanceSummary(string filePath);
 }
 
 internal sealed class TradingViewExportedFileService : ITradingViewExportedFileService
@@ -18,13 +22,24 @@ internal sealed class TradingViewExportedFileService : ITradingViewExportedFileS
     private const char ColumnSeparator = ',';
     private const string DateTimeFormat = "yyyy-MM-dd HH:mm";
 
-    private static readonly Regex FileNamePattern = new(@"^.*_List_of_Trades_\d{4}-\d{2}-\d{2}\.[a-zA-Z0-9]+$", RegexOptions.Compiled);
-    
+    private static class FilePatterns
+    {
+        private const string DatePattern = @"\d{4}-\d{2}-\d{2}";
+        private const string FileExtensionPattern = @"\.[a-zA-Z0-9]+$";
+
+        internal static readonly Regex ListOfTrades = CreatePattern("List_of_Trades");
+        internal static readonly Regex Properties = CreatePattern("Properties");
+        internal static readonly Regex PerformanceSummary = CreatePattern("Performance_Summary");
+        
+        private static Regex CreatePattern(string fileType) =>
+            new($@"^.*_{fileType}_{DatePattern}{FileExtensionPattern}", RegexOptions.Compiled);
+    }
+
     private static readonly Result<IEnumerable<TradingViewTradeRecord>> InvalidFileNameResult = Result<IEnumerable<TradingViewTradeRecord>>.Failure(Error.Invalid("Invalid file name"));
 
     public Result<IEnumerable<TradingViewTradeRecord>> ReadListOfTrades(string listOfTradesFile)
     {
-        if (!FileNamePattern.IsMatch(listOfTradesFile))
+        if (!FilePatterns.ListOfTrades.IsMatch(listOfTradesFile))
         {
             return InvalidFileNameResult;
         }
@@ -76,6 +91,16 @@ internal sealed class TradingViewExportedFileService : ITradingViewExportedFileS
         records.Reverse();
 
         return Result<IEnumerable<TradingViewTradeRecord>>.With(records);
+    }
+
+    public Result ReadPerformanceSummary(string filePath)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Result ReadProperties(string filePath)
+    {
+        throw new NotImplementedException();
     }
 }
 
